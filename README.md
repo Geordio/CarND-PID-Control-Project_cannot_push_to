@@ -47,7 +47,7 @@ As you can see the oscilations at this point are very bad (as shown by the black
 
 Note that the D (the blue line) is not contributing enough to minimise the overshoots, so I increased this further over a number of increments. When I got to Kd = 2, the vehilce was able to complete a full lap.
 Below is the plot of the start of the drive
-![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_bridge_0.2_0_2.png  "PID Plot")
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_0.2_0_2.png  "PID Plot")
 
 Below is the plot of around the position of the bridge
 ![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_bridge_0.2_0_2.png  "PID Plot")
