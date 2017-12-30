@@ -3,6 +3,55 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+
+I was unable to implement a working twiddle function, so I manually tuned the PID controller, essentialy replicating the twiddle function manually, whilst also using references that I found online such as:
+https://robotics.stackexchange.com/questions/167/what-are-good-strategies-for-tuning-pid-loops
+https://innovativecontrols.com/blog/basics-tuning-pid-loops
+
+
+I populated a csv file with the P,I,D values to the steering commad, against the CTE value, so that I could compare the contributions of each to the overal steering command.
+
+I set all gains to 0 except for the P, which I initially set to 1.
+This performed porrly, crashing in a short space of time. The Steering command was equal to the CTE, so when the cross track error is greater than 1, the steering request is greater than 1 (but the range should be -1 to +1).
+
+A plot of the P value can be seen below.
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_1_0_0.png  "PID Plot")
+Note that becasue the Kp is set to 1, it matches the CTE, so it appears to be 1 line as they are equal.
+
+
+Hence I reduced the gain over a number of iterations the P gain until it was oscilating, but was able to stay on the road for the initial straight, and keeping the output steering command in the region 0 -1 to +1.
+At this point Kp = 0.2.
+
+I then modified the D gain. Selecting an appropriate D gain will minimise the overshoots.
+Again, I started by setting this to 1.
+
+
+This time the vehicle was able to get round a large proportion of the track, but the performance was still poor, with excessive oscilation and overshoots, particularly on the bridge.
+I analysed the plot of the P,I,D values.
+
+Below is the plot of the start of the drive
+
+Below is the plot of around the position of the bridge
+
+Note that the D is not contributing enough to minimise the overshoots, so I increased this further over a number of increments. When I got to Kd = 2, the vehilce was able to complete a full lap.
+Below is the plot of the start of the drive
+
+Below is the plot of around the position of the bridge
+
+
+
+At this point I moved on to the I gain.
+Leaving the Kp as 0.2 and Kd as 2, I set Ki to 1.
+The vehicle performance was very poor, leaving the track immediately.
+I analysed the start plot below. If you look carefully you can see the cyan I value immediately goes off the top of the graph and out of the range.
+
+I iteratively reduced the Ki value until I reached 0.001 (I reduced it fairly quicly as I was confident that the vehicle could negogiate a full lap with Ki=0)
+
+I did not implement a PID on the Throttle control due to time contraints (Christmas!). Instead the value is hardcoded to 0.4.
+
+
+
+
 ## Dependencies
 
 * cmake >= 3.5
@@ -19,7 +68,7 @@ Self-Driving Car Engineer Nanodegree Program
   * Run either `./install-mac.sh` or `./install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
     ```
-    git clone https://github.com/uWebSockets/uWebSockets 
+    git clone https://github.com/uWebSockets/uWebSockets
     cd uWebSockets
     git checkout e94b6e1
     ```
@@ -33,7 +82,7 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./pid`. 
+4. Run it: `./pid`.
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
@@ -95,4 +144,3 @@ still be compilable with cmake and make./
 
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
