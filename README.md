@@ -14,13 +14,15 @@ I populated a csv file with the P,I,D values to the steering commad, against the
 I set all gains to 0 except for the P, which I initially set to 1.
 This performed porrly, crashing in a short space of time. The Steering command was equal to the CTE, so when the cross track error is greater than 1, the steering request is greater than 1 (but the range should be -1 to +1).
 
-A plot of the P value can be seen below.
+A plot of the Steering output value can be seen below. Note that this actually shows the CTE value, the P value and the steering output, but as Kp = 1, Kd = 0, Ki = 0, all 3 traces are equal, i.e plotted on top of each other.
+Note, the keys ae misisng off these plots. The key is. CTE: Black, Steering Output: Red, P: Green, D: Blue, I: Cyan
 ![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_1_0_0.png  "PID Plot")
-Note that becasue the Kp is set to 1, it matches the CTE, so it appears to be 1 line as they are equal.
 
 
 Hence I reduced the gain over a number of iterations the P gain until it was oscilating, but was able to stay on the road for the initial straight, and keeping the output steering command in the region 0 -1 to +1.
 At this point Kp = 0.2.
+See plot below
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_0.2_0_0.png  "PID Plot")
 
 I then modified the D gain. Selecting an appropriate D gain will minimise the overshoots.
 Again, I started by setting this to 1.
@@ -30,8 +32,10 @@ This time the vehicle was able to get round a large proportion of the track, but
 I analysed the plot of the P,I,D values.
 
 Below is the plot of the start of the drive
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_0.2_0_1.png  "PID Plot")
 
 Below is the plot of around the position of the bridge
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_bridge_0.2_0_1.png  "PID Plot")
 
 Note that the D is not contributing enough to minimise the overshoots, so I increased this further over a number of increments. When I got to Kd = 2, the vehilce was able to complete a full lap.
 Below is the plot of the start of the drive
