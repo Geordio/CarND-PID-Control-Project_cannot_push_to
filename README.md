@@ -21,8 +21,10 @@ Note, the keys ae misisng off these plots. The key is. CTE: Black, Steering Outp
 
 Hence I reduced the gain over a number of iterations the P gain until it was oscilating, but was able to stay on the road for the initial straight, and keeping the output steering command in the region 0 -1 to +1.
 At this point Kp = 0.2.
+
 See plot below
 ![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_0.2_0_0.png  "PID Plot")
+The key is. CTE: Black, Steering Output: Red, P: Green, D: Blue, I: Cyan
 
 I then modified the D gain. Selecting an appropriate D gain will minimise the overshoots.
 Again, I started by setting this to 1.
@@ -33,15 +35,22 @@ I analysed the plot of the P,I,D values.
 
 Below is the plot of the start of the drive
 ![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_initial_0.2_0_1.png  "PID Plot")
+The key is. CTE: Black, Steering Output: Red, P: Green, D: Blue, I: Cyan
+
+Note the overshoot is now much more reduced than it was at this point
 
 Below is the plot of around the position of the bridge
 ![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_bridge_0.2_0_1.png  "PID Plot")
+The key is. CTE: Black, Steering Output: Red, P: Green, D: Blue, I: Cyan
 
-Note that the D is not contributing enough to minimise the overshoots, so I increased this further over a number of increments. When I got to Kd = 2, the vehilce was able to complete a full lap.
+As you can see the oscilations at this point are very bad (as shown by the black CTE line)
+
+Note that the D (the blue line) is not contributing enough to minimise the overshoots, so I increased this further over a number of increments. When I got to Kd = 2, the vehilce was able to complete a full lap.
 Below is the plot of the start of the drive
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_bridge_0.2_0_2.png  "PID Plot")
 
 Below is the plot of around the position of the bridge
-
+![PID Plot](https://github.com/Geordio/CarND-PID-Control-Project/blob/master/py/debug_bridge_0.2_0_2.png  "PID Plot")
 
 
 At this point I moved on to the I gain.
